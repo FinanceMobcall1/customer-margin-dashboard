@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Margin Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">MOBCALL • VISÃO EXECUTIVA</p>
+        <h1>Clientes & Margem de Lucro</h1>
+        <p class="subtitle">Acompanhe receita, custos e rentabilidade por cliente.</p>
+      </div>
+      <div class="status"><span></span> Dados demonstrativos</div>
+    </header>
+
+    <main>
+      <section class="filters panel">
+        <div class="filter-group"><label for="period">Período</label><select id="period"><option value="all">Todos</option><option value="2026-10">Out/2026</option><option value="2026-09">Set/2026</option><option value="2026-08">Ago/2026</option></select></div>
+        <div class="filter-group"><label for="customer">Cliente</label><select id="customer"><option value="all">Todos os clientes</option></select></div>
+        <div class="filter-group"><label for="segment">Segmento</label><select id="segment"><option value="all">Todos</option><option>Enterprise</option><option>Mid-Market</option><option>SMB</option></select></div>
+        <button id="reset" class="secondary">Limpar filtros</button>
+      </section>
+
+      <section class="kpis" id="kpis"></section>
+
+      <section class="grid two-cols">
+        <article class="panel chart-card">
+          <div class="card-head"><div><h2>Evolução mensal</h2><p>Receita x lucro bruto</p></div></div>
+          <div id="monthlyChart" class="bar-chart" aria-label="Gráfico de evolução mensal"></div>
+        </article>
+        <article class="panel chart-card">
+          <div class="card-head"><div><h2>Margem por cliente</h2><p>Comparação com meta de 30%</p></div></div>
+          <div id="marginChart" class="margin-list"></div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="card-head"><div><h2>Rentabilidade por cliente</h2><p>Clientes ordenados pelo lucro bruto</p></div><span id="rowCount" class="muted"></span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Cliente</th><th>Segmento</th><th>Receita</th><th>Custo</th><th>Lucro bruto</th><th>Margem</th><th>Status</th></tr></thead>
+            <tbody id="customerTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
