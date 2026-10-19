@@ -12,16 +12,15 @@
       <div>
         <p class="eyebrow">MOBCALL • VISÃO EXECUTIVA</p>
         <h1>Clientes & Margem de Lucro</h1>
-        <p class="subtitle">Acompanhe receita, custos e rentabilidade por cliente.</p>
+        <p class="subtitle">Dados conectados à DASH_BASE do Google Sheets.</p>
       </div>
-      <div class="status"><span></span> Dados demonstrativos</div>
+      <div class="status"><span></span> Dados em tempo real</div>
     </header>
 
     <main>
       <section class="filters panel">
-        <div class="filter-group"><label for="period">Período</label><select id="period"><option value="all">Todos</option><option value="2026-10">Out/2026</option><option value="2026-09">Set/2026</option><option value="2026-08">Ago/2026</option></select></div>
         <div class="filter-group"><label for="customer">Cliente</label><select id="customer"><option value="all">Todos os clientes</option></select></div>
-        <div class="filter-group"><label for="segment">Segmento</label><select id="segment"><option value="all">Todos</option><option>Enterprise</option><option>Mid-Market</option><option>SMB</option></select></div>
+        <div class="filter-group"><label for="operator">Operadora</label><select id="operator"><option value="all">Todas as operadoras</option></select></div>
         <button id="reset" class="secondary">Limpar filtros</button>
       </section>
 
@@ -29,8 +28,8 @@
 
       <section class="grid two-cols">
         <article class="panel chart-card">
-          <div class="card-head"><div><h2>Evolução mensal</h2><p>Receita x lucro bruto</p></div></div>
-          <div id="monthlyChart" class="bar-chart" aria-label="Gráfico de evolução mensal"></div>
+          <div class="card-head"><div><h2>Receita x lucro por cliente</h2><p>Top 10 clientes por receita</p></div></div>
+          <div id="monthlyChart" class="bar-chart" aria-label="Gráfico de receita e lucro por cliente"></div>
         </article>
         <article class="panel chart-card">
           <div class="card-head"><div><h2>Margem por cliente</h2><p>Comparação com meta de 30%</p></div></div>
@@ -39,10 +38,10 @@
       </section>
 
       <section class="panel">
-        <div class="card-head"><div><h2>Rentabilidade por cliente</h2><p>Clientes ordenados pelo lucro bruto</p></div><span id="rowCount" class="muted"></span></div>
+        <div class="card-head"><div><h2>Rentabilidade por cliente e operadora</h2><p>Combinações ordenadas pelo lucro bruto</p></div><span id="rowCount" class="muted"></span></div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Cliente</th><th>Segmento</th><th>Receita</th><th>Custo</th><th>Lucro bruto</th><th>Margem</th><th>Status</th></tr></thead>
+            <thead><tr><th>Cliente</th><th>Operadora</th><th>Linhas</th><th>Receita</th><th>Custo</th><th>Lucro bruto</th><th>Margem</th><th>Status</th></tr></thead>
             <tbody id="customerTable"></tbody>
           </table>
         </div>
