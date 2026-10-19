@@ -14,7 +14,7 @@
         <h1>Clientes & Margem de Lucro</h1>
         <p class="subtitle">Dados conectados à DASH_BASE do Google Sheets.</p>
       </div>
-      <div class="status"><span></span> Dados em tempo real</div>
+      <div class="status"><span></span> Dados atualizados automaticamente</div>
     </header>
 
     <main>
@@ -28,12 +28,23 @@
 
       <section class="grid two-cols">
         <article class="panel chart-card">
-          <div class="card-head"><div><h2>Receita x lucro por cliente</h2><p>Top 10 clientes por receita</p></div></div>
-          <div id="monthlyChart" class="bar-chart" aria-label="Gráfico de receita e lucro por cliente"></div>
+          <div class="card-head"><div><h2>Top clientes por lucro</h2><p>Receita x lucro bruto — até 10 clientes</p></div></div>
+          <div id="profitChart" class="bar-chart" aria-label="Gráfico de receita e lucro por cliente"></div>
         </article>
         <article class="panel chart-card">
           <div class="card-head"><div><h2>Margem por cliente</h2><p>Comparação com meta de 30%</p></div></div>
           <div id="marginChart" class="margin-list"></div>
+        </article>
+      </section>
+
+      <section class="grid two-cols">
+        <article class="panel alert-card">
+          <div class="card-head"><div><h2>Pontos de atenção</h2><p>Clientes abaixo da meta ou sem receita cadastrada</p></div><span id="alertCount" class="muted"></span></div>
+          <div id="alerts"></div>
+        </article>
+        <article class="panel operator-card">
+          <div class="card-head"><div><h2>Resultado por operadora</h2><p>Visão consolidada de receita e lucro</p></div></div>
+          <div id="operatorSummary" class="operator-list"></div>
         </article>
       </section>
 
