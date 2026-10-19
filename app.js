@@ -1,7 +1,7 @@
 const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjEbtdcLEi97EdNutQNLo8mgyRZUG7q_xUeAY2hbOBg-G9yAPq6sGJbyf_0fBBfRP7YP3T0zzfpSw2/pub?gid=1578702085&single=true&output=csv';
 
 const brl=n=>Number(n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
-const num=v=>{const s=String(v??'').trim().replace(/R\$\s?/g,'').replace(/\./g,'').replace(',','.'); return Number(s)||0};
+const num=v=>{const s=String(v??'').trim().replace(/R\$\s?/g,'').replace(/\s/g,''); if(!s)return 0; const normalized=s.includes(',')?s.replace(/\./g,'').replace(',','.'):s; return Number(normalized.replace('%',''))||0};
 const norm=s=>String(s??'').trim().toLocaleLowerCase('pt-BR');
 const marginClass=m=>m>=30?'good':m>=20?'warn':'bad';
 const marginStatus=m=>m>=30?'Acima da meta':m>=20?'Atenção':'Crítico';
@@ -28,12 +28,12 @@ function parseCSV(text){
 function buildCustomers(rows){
   const headers=rows[0].map(x=>norm(x));
   const idx=name=>headers.indexOf(norm(name));
-  const iCliente=idx('Cliente'), iOperadora=idx('Operadora'), iLinhas=idx('Número de Linhas'), iReceita=idx('Receita'), iCusto=idx('Custo'), iLucro=idx('Lucro Bruto'), iMargem=idx('Margem %');
+  const iCliente=idx('Cliente'), iOperadora=idx('Operadora'), iLinhas=idx('Número de Linhas'), iReceita=idx('Receita'), iCusto=idx('Custo');
   if(iCliente<0||iOperadora<0||iReceita<0||iCusto<0) throw new Error('Cabeçalhos da DASH_BASE não encontrados.');
   return rows.slice(1).map(r=>{
     const revenue=num(r[iReceita]), cost=num(r[iCusto]);
-    const profit=iLucro>=0?num(r[iLucro]):revenue-cost;
-    const margin=iMargem>=0?num(r[iMargem])*100:(revenue?profit/revenue*100:0);
+    const profit=revenue-cost;
+    const margin=revenue?profit/revenue*100:0;
     return {name:String(r[iCliente]||'').trim(),operator:String(r[iOperadora]||'').trim(),lines:iLinhas>=0?num(r[iLinhas]):0,revenue,cost,profit,margin};
   }).filter(x=>x.name&&x.operator);
 }
